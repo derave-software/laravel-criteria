@@ -2,6 +2,11 @@
 
 namespace DeraveSoftware\LaravelCriteria;
 
+use DeraveSoftware\LaravelCriteria\Criteria\ContainsCriterion;
+use DeraveSoftware\LaravelCriteria\Criteria\IsCriterion;
+use DeraveSoftware\LaravelCriteria\Criteria\MatchesCriterion;
+use DeraveSoftware\LaravelCriteria\Criteria\SortCriterion;
+use DeraveSoftware\LaravelCriteria\Criteria\TimeRangeCriterion;
 use DeraveSoftware\LaravelCriteria\Macros\ApplyCriteria;
 use Illuminate\Support\ServiceProvider;
 
@@ -9,6 +14,13 @@ class LaravelCriteriaServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        CriteriaMap::set([
+            'contains' => ContainsCriterion::class,
+            'matches' => MatchesCriterion::class,
+            'is' => IsCriterion::class,
+            'sort' => SortCriterion::class,
+            'time_range' => TimeRangeCriterion::class
+        ]);
     }
 
     public function register()

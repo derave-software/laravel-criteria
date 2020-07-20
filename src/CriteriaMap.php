@@ -11,13 +11,7 @@ use Illuminate\Support\Arr;
 
 final class CriteriaMap
 {
-    protected static array $criteriaMap = [
-        'contains' => ContainsCriterion::class,
-        'matches' => MatchesCriterion::class,
-        'is' => IsCriterion::class,
-        'sort' => SortCriterion::class,
-        'time_range' => TimeRangeCriterion::class,
-    ];
+    protected static array $criteriaMap = [];
 
     public static function get(string $key): string
     {
