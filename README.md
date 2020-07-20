@@ -6,7 +6,9 @@
 [![Packagist](https://poser.pugx.org/derave-software/laravel-criteria/d/total.svg)](https://packagist.org/packages/derave-software/laravel-criteria)
 [![Packagist](https://img.shields.io/packagist/l/derave-software/laravel-criteria.svg)](https://packagist.org/packages/derave-software/laravel-criteria)
 
-Package description: CHANGE ME
+Package description: This package was inspired by [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder). What it does different it's not bound to Request class.
+You can use criteria to build your query easier and cleaner than inline.
+
 
 ## Installation
 
@@ -22,11 +24,6 @@ php artisan vendor:publish --provider="DeraveSoftware\LaravelCriteria\LaravelCri
 ```
 
 ## Usage
-
-This package is inspired by [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder). What it does different it's not bound to Request class.
-
-You can use criteria to build your query easier and cleaner than inline.
-
 It can be used on two ways:
 
 ### Applying directly on  model
