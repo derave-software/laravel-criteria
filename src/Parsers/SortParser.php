@@ -3,15 +3,19 @@
 namespace DeraveSoftware\LaravelCriteria\Parsers;
 
 use DeraveSoftware\LaravelCriteria\Concerns\ResolvesCriterionClass;
+use DeraveSoftware\LaravelCriteria\Consts\SortOrder;
 use DeraveSoftware\LaravelCriteria\CriteriaMap;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Webmozart\Assert\Assert;
 
 class SortParser
 {
     use ResolvesCriterionClass;
+
+    const CRITERION_CLASS_INDEX = 0;
+    const ALLOWED_COLLUMNS_INDEX = 0;
+    const COLUMN_NAME_INDEX = 0;
 
     public function parse(string $sortString, string $sortDescription): Collection
     {
@@ -23,9 +27,9 @@ class SortParser
             return $criteria;
         }
 
-        $criterionClass = CriteriaMap::get($sortDescription[0]);
+        $criterionClass = CriteriaMap::get($sortDescription[static::CRITERION_CLASS_INDEX]);
 
-        $allowedColumns = explode(',', Arr::get($sortDescription, 1, []));
+        $allowedColumns = explode(',', Arr::get($sortDescription, static::ALLOWED_COLLUMNS_INDEX, []));
 
         $sorts = explode(',', $sortString);
 
@@ -33,7 +37,7 @@ class SortParser
 
             $sortParam = $this->getSortParam($sort);
 
-            if(!in_array($sortParam[0], $allowedColumns)) {
+            if(!in_array($sortParam[static::COLUMN_NAME_INDEX], $allowedColumns)) {
                 continue;
             }
 
@@ -50,9 +54,9 @@ class SortParser
     protected function getSortParam(string $sort)
     {
         if(Str::startsWith($sort, '-')) {
-            return [substr($sort, 1), 'desc'];
+            return [substr($sort, 1), SortOrder::DESC];
         } else {
-            return [$sort, 'asc'];
+            return [$sort, SortOrder::ASC];
         }
 
     }

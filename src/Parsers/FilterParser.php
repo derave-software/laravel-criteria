@@ -10,6 +10,11 @@ use InvalidArgumentException;
 
 class FilterParser
 {
+    const CRITERION_NAME_INDEX = 0;
+    const FILTERED_COLUMN_NAME_INDEX = 0;
+    const FILTER_DESCRIPTION_INDEX = 0;
+    const ADDITIONAL_FILTER_PARAMETERS_INDEX = 0;
+
     use ResolvesCriterionClass;
 
     public function parse(array $filters, array $descriptions): Collection
@@ -24,9 +29,9 @@ class FilterParser
                 continue;
             }
 
-            [$filterName, $params] = $this->parseFilterDescription($filterDescription, $value);
+            [$criteronName, $params] = $this->parseFilterDescription($filterDescription, $value);
 
-            $criteria->push($this->resolveClass(CriteriaMap::get($filterName), ...$params));
+            $criteria->push($this->resolveClass(CriteriaMap::get($criteronName), ...$params));
         }
 
         return $criteria;
@@ -36,25 +41,25 @@ class FilterParser
     {
         $parsed = explode('|', $filterDescription);
 
-        $filterName = Arr::get($parsed, 0, null);
+        $criteronName = Arr::get($parsed, static::CRITERION_NAME_INDEX, null);
 
-        if (! $filterName) {
+        if (! $criteronName) {
             throw new InvalidArgumentException('Filter name not specified');
         }
 
-        $filterParams = explode(':', Arr::get($parsed, 1, ''));
+        $filterParams = explode(':', Arr::get($parsed, static::FILTER_DESCRIPTION_INDEX, ''));
 
         $params = array_merge(
             [$this->getFilterColumn($filterParams)],
-            $this->getFilterParameters(Arr::get($filterParams, 1), $value)
+            $this->getFilterParameters(Arr::get($filterParams, static::ADDITIONAL_FILTER_PARAMETERS_INDEX), $value)
         );
 
-        return [$filterName, $params];
+        return [$criteronName, $params];
     }
 
     protected function getFilterColumn(array $filterParams): string
     {
-        $column = Arr::get($filterParams, 0, null);
+        $column = Arr::get($filterParams, static::FILTERED_COLUMN_NAME_INDEX, null);
 
         if (! $column) {
             throw new InvalidArgumentException('Filter column not specified');
