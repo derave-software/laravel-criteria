@@ -69,13 +69,13 @@ class UsersController extends Controller
         $results = User::applyCriteria($request->criteria())->get();
     }
 }
-
-//?filter[name]=prof&filter[since][from]=2020-01-01&filter[since][to]=
 ```
+Example request query that fallows above example: `?filter[name]=prof&filter[since][from]=2020-01-01&filter[since][to]=`
+
 
 Criteria filter string description has format as follows:
-
 `criterion_name|column:indexes,coma,separated`
+
 If criterion needs more than single value you can define what indexes will be send in filter query param. If param key will not be found in query null value will be applied.
 
 ### Predefined criteria
@@ -155,6 +155,7 @@ class UsersLoggedSinceRequest extends CriteriaRequest
 In `sort` method of your request you can specify criterion responsible for sorting and columns that request is allowed to sort on.
 In example above criterion responsible for sorting will be SortCriterion and columns that it is allowed to sort on are `name` and `logged_in`
 
+Example sort query matching above example `?sort=name,-logged_in` can be read as sort ascending by name and then sort descending by logged in column
 ### Creating your own criteria
 
 You can create your own criteria classes all you need to do is to implement `Criterion` interface.

@@ -6,6 +6,7 @@ use DeraveSoftware\LaravelCriteria\Concerns\ResolvesCriterionClass;
 use DeraveSoftware\LaravelCriteria\CriteriaMap;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Webmozart\Assert\Assert;
 
 class SortParser
@@ -26,18 +27,19 @@ class SortParser
 
         $allowedColumns = explode(',', Arr::get($sortDescription, 1, []));
 
-        $sorts = explode(';', $sortString);
+        $sorts = explode(',', $sortString);
 
         foreach ($sorts as $sort) {
-            $sortParams = $this->getSortParams($sort);
 
-            if (! in_array($sortParams[0], $allowedColumns)) {
+            $sortParam = $this->getSortParam($sort);
+
+            if(!in_array($sortParam[0], $allowedColumns)) {
                 continue;
             }
 
             $criteria->push($this->resolveClass(
                 $criterionClass,
-                ...$sortParams
+                ...$sortParam
             ));
         }
 
@@ -45,16 +47,13 @@ class SortParser
 
     }
 
-    protected function getSortParams(string $sortString): array
+    protected function getSortParam(string $sort)
     {
-        $sortParams = explode(',', $sortString);
-
-        if (count($sortParams) === 1) {
-            array_push($sortParams, 'asc');
+        if(Str::startsWith($sort, '-')) {
+            return [substr($sort, 1), 'desc'];
+        } else {
+            return [$sort, 'asc'];
         }
 
-        Assert::count($sortParams, 2);
-
-        return $sortParams;
     }
 }
