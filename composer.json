@@ -1,16 +1,20 @@
 {
   "name": "derave-software/laravel-criteria",
-  "description": "A laravel criteria",
+  "description": "A package to create criteria for Eloquent",
   "license": "MIT",
   "keywords": [
     "laravel",
-    "criteria"
+    "criteria",
+    "laravel-criteria",
+    "derave"
   ],
+  "homepage": "https://github.com/derave-software/laravel-criteria",
   "type": "library",
   "authors": [
     {
-      "name": "",
-      "email": ""
+      "name": "Patryk Karczmarczyk",
+      "email": "patryk@deravesoftware.com",
+      "homepage": "deravesoftware.com"
     }
   ],
   "require": {
