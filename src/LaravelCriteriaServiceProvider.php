@@ -19,7 +19,7 @@ class LaravelCriteriaServiceProvider extends ServiceProvider
             'matches' => MatchesCriterion::class,
             'is' => IsCriterion::class,
             'sort' => SortCriterion::class,
-            'time_range' => TimeRangeCriterion::class
+            'time_range' => TimeRangeCriterion::class,
         ]);
     }
 

@@ -2,11 +2,6 @@
 
 namespace DeraveSoftware\LaravelCriteria;
 
-use DeraveSoftware\LaravelCriteria\Criteria\ContainsCriterion;
-use DeraveSoftware\LaravelCriteria\Criteria\IsCriterion;
-use DeraveSoftware\LaravelCriteria\Criteria\MatchesCriterion;
-use DeraveSoftware\LaravelCriteria\Criteria\SortCriterion;
-use DeraveSoftware\LaravelCriteria\Criteria\TimeRangeCriterion;
 use Illuminate\Support\Arr;
 
 final class CriteriaMap

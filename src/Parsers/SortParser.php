@@ -37,7 +37,7 @@ class SortParser
 
             $sortParam = $this->getSortParam($sort);
 
-            if(!in_array($sortParam[static::COLUMN_NAME_INDEX], $allowedColumns)) {
+            if (! in_array($sortParam[static::COLUMN_NAME_INDEX], $allowedColumns)) {
                 continue;
             }
 
@@ -53,7 +53,7 @@ class SortParser
 
     protected function getSortParam(string $sort)
     {
-        if(Str::startsWith($sort, '-')) {
+        if (Str::startsWith($sort, '-')) {
             return [substr($sort, 1), SortOrder::DESC];
         } else {
             return [$sort, SortOrder::ASC];
