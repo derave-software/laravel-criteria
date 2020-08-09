@@ -91,26 +91,15 @@ new ContainsCriterion('name', 'prof');
 //Will search for all records which column name contains string 'prof'
 ```
 
-### Matches criterion
-Matches criterion is similar to contains but it searches for exact match
+### Equals criterion
+Equals criterion search for objects equal to given value
 
 ```php
-use DeraveSoftware\LaravelCriteria\Criteria\MatchesCriterion;
+use DeraveSoftware\LaravelCriteria\Criteria\EqualsCriterion;
 
-new MatchesCriterion('name', 'prof');
+new EqualsCriterion('name', 'prof');
 
 //Will search for all records which column name equals 'prof'
-```
-
-### Is criterion
-Is criterion allows you to search for boolean values
-
-```php
-use DeraveSoftware\LaravelCriteria\Criteria\IsCriterion;
-
-new IsCriterion('is_active', true);
-
-//Will search for all records which column name equals true
 ```
 
 ### Time range criterion

@@ -5,7 +5,7 @@ namespace DeraveSoftware\LaravelCriteria\Criteria;
 use DeraveSoftware\LaravelCriteria\Contracts\Criterion;
 use Illuminate\Database\Query\Builder;
 
-class IsCriterion implements Criterion
+class EqualsCriterion implements Criterion
 {
     protected string $column;
     protected string $search;
@@ -15,7 +15,7 @@ class IsCriterion implements Criterion
      * @param string $column
      * @param string $search
      */
-    public function __construct(string $column, bool $search)
+    public function __construct(string $column, $search)
     {
         $this->column = $column;
         $this->search = $search;
@@ -23,7 +23,7 @@ class IsCriterion implements Criterion
 
     public function applyOn(Builder $builder): Criterion
     {
-        $builder->where($this->column, '=', (int)$this->search);
+        $builder->where($this->column, '=', $this->search);
 
         return $this;
     }
